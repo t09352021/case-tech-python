@@ -35,5 +35,11 @@ if __name__=="__main__":
     informacoes['duracao']=filme['running_time']
     informacoes['ano']=filme['realese_date']
 
+    
+if filmes !='':
+  ficha_tecnica.adicionar(informacoes)
+else:
+  print("informacoes não carregadas")
+
 
   
