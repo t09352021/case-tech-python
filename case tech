@@ -22,6 +22,14 @@ class Universo_Ghibli:
     self.direcao.append(Direcao)
     self.duracao.append(Duracao)
     self.ano.append(Ano)
+    
+    def remover(self,Filmes,Descricao,Direcao,Duracao,Ano):
+      self.filmes.pop(Filmes)
+      self.descricao.pop(Descricao)
+      self.direcao.pop(Direcao)
+      self.duracao.pop(Duracao)
+      self.ano.pop(Ano)
+
 
 if __name__=="__main__":
   request()
