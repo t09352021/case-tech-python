@@ -1,0 +1,39 @@
+from requests.api import request
+import json
+
+
+
+class GetApi ():
+  def request():
+    request=request.get(f"('https://ghibliapi.herokuapp.com/")
+    data = json.loads(request.content)
+    dados_ident = json.dumps(data, indent=4)
+    print(dados_ident)    
+
+
+class Universo_Ghibli:
+  def __init__(self,filmes):
+    self.filmes=filmes
+    filmes= dados_ident
+
+  def adicionar(self,Filmes,Descricao,Direcao,Duracao,Ano)
+    self.filmes.append(Filmes)
+    self.descricao.append(Descricao)
+    self.direcao.append(Direcao)
+    self.duracao.append(Duracao)
+    self.ano.append(Ano)
+
+if __name__=="__main__":
+  request()
+  ficha_tecnica = Universo_Ghibli()
+
+  for filmes in data_ident:
+    informacoes={}
+    informacoes['filme']=filme['title']
+    informacoes['descricao']=filme['description']
+    informacoes['direcao']=filme['direction']
+    informacoes['duracao']=filme['running_time']
+    informacoes['ano']=filme['realese_date']
+
+
+  
