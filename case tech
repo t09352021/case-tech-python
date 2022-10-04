@@ -1,53 +1,62 @@
-from requests.api import request
+import requests
 import json
 
+#Criacao de classe para requisitar API
+class GetApi():
+  def __init__(self,link):
+    self.request=request.get(link)
+    self.data=json.loads(self.request.content)
+    self.dados_ident=json.dumps(self.data,ident=4)
+
+#Criacao da classe minha lista com construtor de classe
+class Minha_lista_Netflix:
+  def __init__(self):
+    self.filme=[]
+
+  #Metodo de adicionar filme à lista
+  def adicionar(self):
+    self.append(filme)
+  
+  #Metodo de remover filme da lista
+  def remover(self):
+    self.pop(filme)
+
+  
+  #Metodo para fazer leitura do conteudo da lista
+  def leitura(self):
+    self.print(filme)
 
 
-class GetApi ():
-  def request():
-    request=request.get(f"('https://ghibliapi.herokuapp.com/")
-    data = json.loads(request.content)
-    dados_ident = json.dumps(data, indent=4)
-    print(dados_ident)    
+  #Metodo para atualizar titulos em idioma original
+  def atualizar(self):
+    informacoes['filme']=filme['orginal_title']
+    self.filme = informacoes
+    print(self.filme)
+  
+  
+  #Metodo para contar quantos itens tem a lista
+  def contar(self):
+    self.contar = len(Minha_lista_Netflix)
+    print("Há %d filmes nesta lista lista",self.contar)
 
+  
+  #Metodo para ordernar lista
+  def ordenar(self):
+    self.sort(Minha_Lista_netflix)
+    print("",self.sort(Minha_Lista_netflix))
 
-class Universo_Ghibli:
-  def __init__(self,filmes):
-    self.filmes=filmes
-    filmes= dados_ident
+if __name__ == "__main__":
+  api = GetApi("https://ghibliapi.herokuapp.com/films")
+  Bruna = Minha_Lista_Netflix()
 
-  def adicionar(self,Filmes,Descricao,Direcao,Duracao,Ano)
-    self.filmes.append(Filmes)
-    self.descricao.append(Descricao)
-    self.direcao.append(Direcao)
-    self.duracao.append(Duracao)
-    self.ano.append(Ano)
-    
-  def remover(self,Filmes,Descricao,Direcao,Duracao,Ano):
-    self.filmes.pop(Filmes)
-    self.descricao.pop(Descricao)
-    self.direcao.pop(Direcao)
-    self.duracao.pop(Duracao)
-    self.ano.pop(Ano)
-
-
-if __name__=="__main__":
-  request()
-  ficha_tecnica = Universo_Ghibli()
-
-  for filmes in data_ident:
+  api_tratados = []
+  for filmes in api.dados:
     informacoes={}
     informacoes['filme']=filme['title']
     informacoes['descricao']=filme['description']
     informacoes['direcao']=filme['direction']
     informacoes['duracao']=filme['running_time']
-    informacoes['ano']=filme['realese_date']
+    informacoes['ano']=filme['realese_date']  
 
-    
-if filmes !='':
-  ficha_tecnica.adicionar(informacoes)
-else:
-  print("informacoes não carregadas")
-
-
-  
+    Bruna.MInha_Lista_Netflix.adicionar("Meu amigo totoro")
+    Bruna.leitura(Minha_lista_Netflix)
