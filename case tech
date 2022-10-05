@@ -2,6 +2,7 @@ import requests
 import json
 import pprint
 
+#Criacao de classe para fazer requisicao na API
 class GetApi():
   def __init__(self,link):
     self.request= requests.get(link)
@@ -10,33 +11,38 @@ class GetApi():
     self.dados_ident =json.dumps(self.data,indent=4)
     #print(self.dados_ident)
 
+#Criacao de classe e metodos para selecionar os filmes favoritos
 class Minha_Lista_Netflix:
   def __init__(self):
     self.favoritos=[]
 
+#Metodo para adicionar filme a lista
   def adicionar(self,filme):
     self.favoritos.append(filme)
-    
+
+#Metodo para remover um filme a lista
   def remover(self,filme):
     self.favoritos.pop()
     len(self.favoritos)
     if ( len(self.favoritos) == 0):
         print("\nLista vazia\n")
 
+#Metodo para ler os filmes dentro da lista de favoritos
   def leitura(self):
     pprint.pprint(self.favoritos)
 
+#Metodo para atualizar/Modificar titulo do filme, nesse caso, do titulo original para o titulo em português
   def atualizar(self,titulo_original,titulo_port):
     for item in self.favoritos:
       if item['Filme'] == titulo_original:
          item['Filme'] = titulo_port
 
-  
+#Metodo para contar quantos itens há dentro da lista de favoritos
   def contar(self):
-    contagem = len(self.favoritos)
-    texto = (f"Há {contagem} filme(s) nesta lista lista\n")
-    print(texto)
-
+    item = len(self.favoritos)
+    print(f"Há {item} filme(s) nesta lista lista\n")
+    
+#Metodo para organizar o titulo dos filmes da lista de favoritos
   def ordenar(self):
    print("\nLista de filmes por ordem alfabética: ")
    filmes_ordenados = sorted(self.favoritos, key=lambda obj: obj["Filme"])
@@ -44,11 +50,11 @@ class Minha_Lista_Netflix:
       print(f"{item['Filme']}")
      
 
-
 if __name__ == "__main__":
+  #Link para requisitar API
   api = GetApi("https://ghibliapi.herokuapp.com/films")
-  Bruna = Minha_Lista_Netflix()
 
+  #Criacao de lista para dados tratados
   api_tratados = []
   for filme in api.data:
     informacoes={}
@@ -58,13 +64,26 @@ if __name__ == "__main__":
     informacoes['Duração']=filme['running_time']
     informacoes['Ano']=filme['release_date']  
     api_tratados.append(informacoes)
+     #pprint.pprint(api_tratados)
 
-#pprint.pprint(api_tratados)
-#Bruna.adicionar(api_tratados[i])
+#Objeto criado para identificar a lista de favoritos
+Bruna = Minha_Lista_Netflix()
+
+
+#Looping para adicionar vários filmes de uma vez e em sequência númerica pela posicao na lista
+for i in range(5):
+  Bruna.adicionar(api_tratados[i])
+
+#chamada de metodo para adicionar apenas um filme
+Bruna.adicionar(api_tratados[6])
+
+#chamada de metodo para leitura de lista
 #Bruna.leitura()
-#Bruna.contar()
+#chamada de metodo para contar quantos filmes tem dentro da lista de favoritos
+Bruna.contar()
 #Bruna.atualizar("Castle in the Sky","O Castelo no Céu")
 #Bruna.leitura()
-#Bruna.remover("O Castelo no Céu")
+#Bruna.remover([0])
+#Bruna.contar()
 #Bruna.leitura()
-#Bruna.ordenar()
+Bruna.ordenar()
