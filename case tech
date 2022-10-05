@@ -1,62 +1,70 @@
 import requests
 import json
+import pprint
 
-#Criacao de classe para requisitar API
 class GetApi():
   def __init__(self,link):
-    self.request=request.get(link)
-    self.data=json.loads(self.request.content)
-    self.dados_ident=json.dumps(self.data,ident=4)
+    self.request= requests.get(link)
+    self.data = json.loads(self.request.content)
+    print(self.data)
+    self.dados_ident =json.dumps(self.data,indent=4)
+    #print(self.dados_ident)
 
-#Criacao da classe minha lista com construtor de classe
-class Minha_lista_Netflix:
+class Minha_Lista_Netflix:
   def __init__(self):
-    self.filme=[]
+    self.favoritos=[]
 
-  #Metodo de adicionar filme à lista
-  def adicionar(self):
-    self.append(filme)
-  
-  #Metodo de remover filme da lista
-  def remover(self):
-    self.pop(filme)
+  def adicionar(self,filme):
+    self.favoritos.append(filme)
+    
+  def remover(self,filme):
+    self.favoritos.pop()
+    len(self.favoritos)
+    if ( len(self.favoritos) == 0):
+        print("\nLista vazia\n")
 
-  
-  #Metodo para fazer leitura do conteudo da lista
   def leitura(self):
-    self.print(filme)
+    pprint.pprint(self.favoritos)
 
+  def atualizar(self,titulo_original,titulo_port):
+    for item in self.favoritos:
+      if item['Filme'] == titulo_original:
+         item['Filme'] = titulo_port
 
-  #Metodo para atualizar titulos em idioma original
-  def atualizar(self):
-    informacoes['filme']=filme['orginal_title']
-    self.filme = informacoes
-    print(self.filme)
   
-  
-  #Metodo para contar quantos itens tem a lista
   def contar(self):
-    self.contar = len(Minha_lista_Netflix)
-    print("Há %d filmes nesta lista lista",self.contar)
+    contagem = len(self.favoritos)
+    texto = (f"Há {contagem} filme(s) nesta lista lista\n")
+    print(texto)
 
-  
-  #Metodo para ordernar lista
   def ordenar(self):
-    self.sort(Minha_Lista_netflix)
-    print("",self.sort(Minha_Lista_netflix))
+   print("\nLista de filmes por ordem alfabética: ")
+   filmes_ordenados = sorted(self.favoritos, key=lambda obj: obj["Filme"])
+   for item in filmes_ordenados:
+      print(f"{item['Filme']}")
+     
+
 
 if __name__ == "__main__":
   api = GetApi("https://ghibliapi.herokuapp.com/films")
   Bruna = Minha_Lista_Netflix()
 
   api_tratados = []
-  for filmes in api.dados:
+  for filme in api.data:
     informacoes={}
-    informacoes['filme']=filme['title']
-    informacoes['descricao']=filme['description']
-    informacoes['direcao']=filme['direction']
-    informacoes['duracao']=filme['running_time']
-    informacoes['ano']=filme['realese_date']  
+    informacoes['Filme']=filme['title']
+    informacoes['Descrição']=filme['description']
+    informacoes['Direção']=filme['director']
+    informacoes['Duração']=filme['running_time']
+    informacoes['Ano']=filme['release_date']  
+    api_tratados.append(informacoes)
 
-    Bruna.MInha_Lista_Netflix.adicionar("Meu amigo totoro")
-    Bruna.leitura(Minha_lista_Netflix)
+#pprint.pprint(api_tratados)
+#Bruna.adicionar(api_tratados[i])
+#Bruna.leitura()
+#Bruna.contar()
+#Bruna.atualizar("Castle in the Sky","O Castelo no Céu")
+#Bruna.leitura()
+#Bruna.remover("O Castelo no Céu")
+#Bruna.leitura()
+#Bruna.ordenar()
